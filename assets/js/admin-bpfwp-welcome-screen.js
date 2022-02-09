@@ -39,6 +39,8 @@ jQuery(document).ready(function() {
 		var name = jQuery('input[name="bpfwp-contact-name"]').val();
 		var address = jQuery('textarea[name="bpfwp-contact-address"]').val();
 		var phone = jQuery('input[name="bpfwp-contact-phone"]').val();
+		var cellphone = jQuery('input[name="bpfwp-contact-cellphone"]').val();
+		var fax = jQuery('input[name="bpfwp-contact-fax"]').val();
 		var email = jQuery('input[name="bpfwp-contact-email"]').val();
 
 		jQuery('input[name="bpfwp-contact-name"]').val('');
@@ -51,6 +53,8 @@ jQuery(document).ready(function() {
 			name: name,
 			address: address,
 			phone: phone,
+			cellphone: cellphone,
+			fax: fax,
 			email: email,
 			nonce: bpfwp_getting_started.nonce,
 			action: 'bpfwp_welcome_set_contact_information'
