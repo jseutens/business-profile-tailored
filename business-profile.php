@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: Five Star Business Profile and Schema
+ * Plugin Name: Five Star Business Profile and Schema tailored
  * Plugin URI:  https://www.fivestarplugins.com/plugins/business-profile/
  * Description: Add schema structured data to any page or post type. Create an SEO friendly contact card with your business info and associated schema. Supports Google Map, opening hours and more.
  * Version:     2.2.1
