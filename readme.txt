@@ -1,4 +1,4 @@
-=== Five Star Business Profile and Schema ===
+=== Five Star Business Profile and Schema  including fax and mobile===
 Contributors: FiveStarPlugins
 Author URI: https://www.fivestarplugins.com/
 Plugin URL: https://www.fivestarplugins.com/plugins/business-profile/
