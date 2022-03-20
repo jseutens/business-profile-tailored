@@ -77,7 +77,7 @@ if ( ! class_exists( 'bpfwpSettings' ) ) :
 				'name'        => get_bloginfo( 'name' ),
 			);
 
-			$this->defaults = apply_filters( 'bpfwp_defaults', $this->defaults );
+			$this->defaults = apply_filters( 'bpfwp_defaults', $this->defaults, $this );
 		}
 
 		/**
@@ -105,8 +105,8 @@ if ( ! class_exists( 'bpfwpSettings' ) ) :
 					'show_address'              => true,
 					'show_get_directions'       => true,
 					'show_phone'                => true,
-					'show_cellphone'                => true,
-					'show_fax'                => true,
+					'show_cellphone'            => true,
+					'show_fax'                  => true,
 					'show_ordering_link'        => true,
 					'show_contact'              => true,
 					'show_opening_hours'        => true,
@@ -201,7 +201,7 @@ if ( ! class_exists( 'bpfwpSettings' ) ) :
 						if( empty($result_value) ) {
 							$result_value = get_post_meta( $location, 'fax', true );
 						}
-						break;					
+						break;	
 					case 'exceptions' :
 					case 'schema_type' :
 					case 'phone' :
@@ -465,7 +465,7 @@ if ( ! class_exists( 'bpfwpSettings' ) ) :
 					)
 				)
 			);
-
+			
 			$sap->add_setting(
 				'bpfwp-settings',
 				'bpfwp-contact',
@@ -480,7 +480,6 @@ if ( ! class_exists( 'bpfwpSettings' ) ) :
 				)
 			);
 			
-
 			$sap->add_setting(
 				'bpfwp-settings',
 				'bpfwp-contact',
@@ -493,7 +492,7 @@ if ( ! class_exists( 'bpfwpSettings' ) ) :
 						'class' 	=> 'bpfwp-fax'
 					)
 				)
-			);			
+			);	
 			$sap->add_setting(
 				'bpfwp-settings',
 				'bpfwp-contact',
@@ -723,118 +722,90 @@ if ( ! class_exists( 'bpfwpSettings' ) ) :
 			// 	)
 			// );
 
-			if ( ! is_object($bpfwp_controller) or ! $bpfwp_controller->permissions->check_permission('premium') ) {
-				$premium_permissions = array(
-					'disabled'		=> true,
-					'disabled_image'=> '#',
-					'purchase_link'	=> 'https://www.fivestarplugins.com/plugins/business-profile/'
-				);
-			}
-			else { $premium_permissions = array(); }
+			// "Premium" Tab
+		    $sap->add_section(
+		      'bpfwp-settings',
+		      array(
+		        'id'     => 'bpfwp-premium-tab',
+		        'title'  => __( 'Premium', 'business-profile' ),
+		        'is_tab' => true,
+		        'show_submit_button' => $this->show_submit_button( 'premium' )
+		      )
+		    );
+		    $sap->add_section(
+		      'bpfwp-settings',
+		      array(
+		        'id'       => 'bpfwp-premium-tab-body',
+		        'tab'      => 'bpfwp-premium-tab',
+		        'callback' => $this->premium_info( 'premium' )
+		      )
+		    );
 
-			if ( ! is_object($bpfwp_controller) or ! $bpfwp_controller->permissions->check_permission('integrations') ) {
-				$integrations_permissions = array(
-					'disabled'		=> true,
-					'disabled_image'=> '#',
-					'purchase_link'	=> 'https://www.fivestarplugins.com/plugins/business-profile/'
-				);
-			}
-			else { $integrations_permissions = array(); }
-
-			if ( ! is_object($bpfwp_controller) or ! $bpfwp_controller->permissions->check_permission('locations') ) {
-				$locations_permissions = array(
-					'disabled'		=> true,
-					'disabled_image'=> '#',
-					'purchase_link'	=> 'https://www.fivestarplugins.com/plugins/business-profile/'
-				);
-			}
-			else { $locations_permissions = array(); }
-
-			$sap->add_section(
-				'bpfwp-settings',
-				array(
-					'id'            => 'bpfwp-premium',
-					'title'         => __( 'Premium', 'business-profile' ),
-					'is_tab'		=> true,
-				)
-			);
-
-			$sap->add_section(
-				'bpfwp-settings',
-				array_merge(
-					array(
-						'id'            => 'bpfwp-premium-general',
-						'title'         => __( 'General', 'business-profile' ),
-						'tab'	          => 'bpfwp-premium'
-					),
-					$premium_permissions
-				)
-			);
-
-			$sap->add_setting(
-				'bpfwp-settings',
-				'bpfwp-premium-general',
-				'toggle',
-				array(
-					'id'			=> 'article-rich-snippets',
-					'title'			=> __( 'Post Rich Snippets', 'business-profile' ),
-					'description'	=> __( 'Automatically enable article \'Rich Snippets\' for Google for all regular posts on the site.', 'business-profile' ),
-					'args'			=> array(
-						'label_for' => 'bpfwp-settings[article-rich-snippets]',
-						'class' 	=> 'bpfwp-article-rich-snippets'
-					)
-
-				)
-			);
-
-			$sap->add_setting(
-				'bpfwp-settings',
-				'bpfwp-premium-general',
-				'toggle',
-				array(
-					'id'			=> 'schema-default-helpers',
-					'title'			=> __( 'Schema Default Helpers', 'business-profile' ),
-					'description'	=> __( 'Adds a helper pop-up that can be accessed on click on the Schema edit screen that list the available default options, functions and metas', 'business-profile' ),
-					'args'			=> array(
-						'label_for' => 'bpfwp-settings[schema-default-helpers]',
-						'class' 	=> 'bpfwp-schema-default-helpers'
-					)
-
-				)
-			);
-
-			$sap->add_section(
-				'bpfwp-settings',
-				array_merge(
-					array(
-						'id'            => 'bpfwp-integrations',
-						'title'         => __( 'Plugin Integrations', 'business-profile' ),
-						'tab'	         => 'bpfwp-premium'
-					),
-					$integrations_permissions
-				)
-			);
-
-			$sap->add_setting(
-				'bpfwp-settings',
-				'bpfwp-integrations',
-				'toggle',
-				array(
-					'id'			=> 'woocommerce-integration',
-					'title'			=> __( 'WooCommerce Integration', 'business-profile' ),
-					'description'	=> __( 'Automatically enable product \'Rich Snippets\' for Google.', 'business-profile' ),
-					'args'			=> array(
-						'label_for' => 'bpfwp-settings[woocommerce-integration]',
-						'class' 	=> 'bpfwp-woocommerce-integration'
-					)
-
-				)
-			);
-
-			$sap = apply_filters( 'bpfwp_settings_page', $sap );
+			$sap = apply_filters( 'bpfwp_settings_page', $sap, $this );
 
 			$sap->add_admin_menus();
 
+		}
+
+		public function show_submit_button( $permission_type = '' ) {
+			global $bpfwp_controller;
+	
+			if ( $bpfwp_controller->permissions->check_permission( $permission_type ) ) {
+				return true;
+			}
+	
+			return false;
+		}
+	
+		public function premium_info( $section_and_perm_type ) {
+			global $bpfwp_controller;
+	
+			$is_premium_user = $bpfwp_controller->permissions->check_permission( $section_and_perm_type );
+			$is_helper_installed = defined( 'FSPPH_PLUGIN_FNAME' ) && is_plugin_active( FSPPH_PLUGIN_FNAME );
+	
+			if ( $is_premium_user || $is_helper_installed ) {
+				return false;
+			}
+	
+			$content = '';
+	
+			$premium_features = '
+				<p><strong>' . __( 'The premium version also gives you access to the following features:', 'business-profile' ) . '</strong></p>
+				<ul class="bpfwp-dashboard-new-footer-one-benefits">
+					<li>' . __( 'WooCommerce Integration', 'business-profile' ) . '</li>
+					<li>' . __( 'Full Product Schema Automatically Applied', 'business-profile' ) . '</li>
+					<li>' . __( 'Automatically-integrated schema for posts', 'business-profile' ) . '</li>
+					<li>' . __( 'Default Schema Helpers', 'business-profile' ) . '</li>
+					<li>' . __( 'Quickly add schema for any page/element using our custom list of defaults', 'business-profile' ) . '</li>
+					<li>' . __( 'Email Support', 'business-profile' ) . '</li>
+				</ul>
+				<div class="bpfwp-dashboard-new-footer-one-buttons">
+					<a class="bpfwp-dashboard-new-upgrade-button" href="https://www.fivestarplugins.com/license-payment/?Selected=BPFWP&Quantity=1" target="_blank">' . __( 'UPGRADE NOW', 'business-profile' ) . '</a>
+				</div>
+			';
+	
+			switch ( $section_and_perm_type ) {
+	
+				case 'premium':
+	
+					$content = '
+						<div class="bpfwp-settings-preview">
+							<h2>' . __( 'Premium', 'business-profile' ) . '<span>' . __( 'Premium', 'business-profile' ) . '</span></h2>
+							<p>' . __( 'The premium options let you enable WooCommerce integration, which automatically adds schema to your products, enable automatic schema for the posts on your site and add default options for all the schema fields available in the plugin.', 'business-profile' ) . '</p>
+							<div class="bpfwp-settings-preview-images">
+								<img src="' . BPFWP_PLUGIN_URL . '/assets/img/premium-screenshots/premium.png" alt="BPFWP premium screenshot">
+							</div>
+							' . $premium_features . '
+						</div>
+					';
+	
+					break;
+			}
+	
+			return function() use ( $content ) {
+	
+				echo wp_kses_post( $content );
+			};
 		}
 
 		/**

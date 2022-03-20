@@ -66,3 +66,10 @@ jQuery(document).ready(function($){
 		}
 	});
 });
+
+//SETTINGS PREVIEW SCREENS
+
+jQuery( document ).ready( function() {
+
+	jQuery( '.bpfwp-settings-preview' ).prev( 'h2' ).hide();
+});

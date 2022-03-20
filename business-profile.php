@@ -3,7 +3,7 @@
  * Plugin Name: Five Star Business Profile and Schema
  * Plugin URI:  https://www.fivestarplugins.com/plugins/business-profile/
  * Description: Add schema structured data to any page or post type. Create an SEO friendly contact card with your business info and associated schema. Supports Google Map, opening hours and more.
- * Version:     2.1.10
+ * Version:     2.2.1
  * Author:      Five Star Plugins
  * Author URI:  https://www.fivestarplugins.com
  * License: GPLv3
@@ -68,9 +68,6 @@ if ( ! class_exists( 'bpfwpInit', false ) ) :
 			// Add a link to the Google Rich Results Test Page for front-end pages
 			add_action( 'admin_bar_menu', array( $this, 'add_admin_bar_link' ), 100 );
 
-			// Load permissions and handle combination
-			$this->permissions = new bpfwpPermissions();
-
 			// Load plugin dashboard
 			require_once( BPFWP_PLUGIN_DIR . '/includes/class-dashboard.php' );
 			new bpfwpDashboard();
@@ -123,7 +120,7 @@ if ( ! class_exists( 'bpfwpInit', false ) ) :
 			define( 'BPFWP_PLUGIN_DIR', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
 			define( 'BPFWP_PLUGIN_URL', untrailingslashit( plugin_dir_url( __FILE__ ) ) );
 			define( 'BPFWP_PLUGIN_FNAME', plugin_basename( __FILE__ ) );
-			define( 'BPFWP_VERSION', '2.1.10' );
+			define( 'BPFWP_VERSION', '2.2.1' );
 		}
 
 		/**
@@ -184,6 +181,7 @@ if ( ! class_exists( 'bpfwpInit', false ) ) :
 		 * @return void
 		 */
 		protected function wp_hooks() {
+			add_action( 'plugins_loaded',        array( $this, 'plugin_loaded_action_hook' ) );
 			add_action( 'plugins_loaded',        array( $this, 'load_textdomain' ) );
 			add_action( 'admin_notices',		 array( $this, 'display_header_area') );
 			add_action( 'admin_notices',         array( $this, 'maybe_display_helper_notice' ) );
@@ -194,6 +192,18 @@ if ( ! class_exists( 'bpfwpInit', false ) ) :
 			add_filter( 'plugin_action_links',   array( $this, 'plugin_action_links' ), 10, 2 );
 
 			add_action( 'wp_ajax_bpfwp_hide_helper_notice', array( $this, 'hide_helper_notice' ) );
+		}
+
+		/**
+		 * Allow third-party plugins to interact with the plugin, if necessary
+		 * 
+		 * @since 2.2.0
+		 * @access public
+		 * @return void
+		 */
+		public function plugin_loaded_action_hook() {
+	
+			do_action( 'bpfwp_initialized' );
 		}
 
 		/**
@@ -459,6 +469,5 @@ if ( ! class_exists( 'bpfwpInit', false ) ) :
 	}
 endif;
 
+global $bpfwp_controller;
 $bpfwp_controller = bpfwpInit::instance();
-
-do_action( 'bpfwp_initialized' );

@@ -3,9 +3,9 @@ Contributors: FiveStarPlugins
 Author URI: https://www.fivestarplugins.com/
 Plugin URL: https://www.fivestarplugins.com/plugins/business-profile/
 Requires at Least: 5.3
-Tested Up To: 5.8
+Tested Up To: 5.9
 Tags: business profile, seo, local seo, schema, address, google map, contact, phone, contact card, vcard, contact info, business location, business address, business map, business schema, organization schema, corporation schema, contact schema, address schema, location schema, map schema, business structured data, business microdata, address microdata, location structured data, location microdata, contact shortcode, location shortcode, address shortcode, schema shortcode, gutenberg schema, gutenberg address
-Stable tag: 2.1.10
+Stable tag: 2.2.1
 License: GPLv3
 License URI:http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -191,6 +191,13 @@ You'll find more help in the [User Guide](http://doc.themeofthecrop.com/plugins/
 7. Add a contact card to any page or post with the block.
 
 == Changelog ==
+
+= 2.2.1 (2022-02-18) =
+- Update to counter an error with WP-CLI.
+
+= 2.2.0 (2022-02-16) =
+- Changed how premium settings areas are previewed.
+- Removed unused packaging files.
 
 = 2.1.10 (2022-01-31) =
 - Fixed an issue in which, in certain instances, the plugin wouldn't reactivate after having been deactivated.
