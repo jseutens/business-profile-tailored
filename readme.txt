@@ -191,6 +191,8 @@ You'll find more help in the [User Guide](http://doc.themeofthecrop.com/plugins/
 7. Add a contact card to any page or post with the block.
 
 == Changelog ==
+= 2.3.0 (2022-06-06) =
+- Fork from the original plugin , until fax and cellphone are added
 
 = 2.2.1 (2022-02-18) =
 - Update to counter an error with WP-CLI.
