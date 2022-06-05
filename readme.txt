@@ -1,5 +1,5 @@
 === Five Star Business Profile and Schema  including fax and mobile===
-Contributors: FiveStarPlugins
+Contributors: jseutens FiveStarPlugins
 Author URI: https://www.aati.be/
 Plugin URL: https://github.com/jseutens/business-profile-tailored
 Requires at Least: 5.9
