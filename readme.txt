@@ -1,11 +1,11 @@
 === Five Star Business Profile and Schema  including fax and mobile===
 Contributors: FiveStarPlugins
-Author URI: https://www.fivestarplugins.com/
-Plugin URL: https://www.fivestarplugins.com/plugins/business-profile/
-Requires at Least: 5.3
-Tested Up To: 5.9
+Author URI: https://www.aati.be/
+Plugin URL: https://github.com/jseutens/business-profile-tailored
+Requires at Least: 5.9
+Tested Up To: 6.0
 Tags: business profile, seo, local seo, schema, address, google map, contact, phone, contact card, vcard, contact info, business location, business address, business map, business schema, organization schema, corporation schema, contact schema, address schema, location schema, map schema, business structured data, business microdata, address microdata, location structured data, location microdata, contact shortcode, location shortcode, address shortcode, schema shortcode, gutenberg schema, gutenberg address
-Stable tag: 2.2.1
+Stable tag: 2.3.0
 License: GPLv3
 License URI:http://www.gnu.org/licenses/gpl-3.0.html
 
