@@ -1,15 +1,15 @@
 <?php
 /**
  * Plugin Name: Five Star Business Profile and Schema tailored
- * Plugin URI:  https://www.fivestarplugins.com/plugins/business-profile/
+ * Plugin URI:  https://github.com/jseutens/business-profile-tailored/
  * Description: Add schema structured data to any page or post type. Create an SEO friendly contact card with your business info and associated schema. Supports Google Map, opening hours and more.
- * Version:     2.2.1
- * Author:      Five Star Plugins
- * Author URI:  https://www.fivestarplugins.com
+ * Version:     2.3.0
+ * Author: Johan Seutens
+ * Author URI: https://www.aati.be
  * License: GPLv3
  * License URI:http://www.gnu.org/licenses/gpl-3.0.html
  *
- * Text Domain: business-profile
+ * Text Domain: business-profile-tailored
  * Domain Path: /languages/
  */
 
